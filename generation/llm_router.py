@@ -4,6 +4,9 @@ from pathlib import Path
 from datetime import datetime
 import time
 from google.genai import types
+from dotenv import load_dotenv
+
+load_dotenv()   
 
 client = genai.Client()
 

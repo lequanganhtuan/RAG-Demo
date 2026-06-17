@@ -1,10 +1,10 @@
 from retrieval.retriever import search_faiss
-from context_manager import (
+from generation.context_manager import (
     rerank_results,
     expand_parent_context,
     apply_token_budget
 )
-from prompt_builder import (
+from generation.prompt_builder import (
     build_prompt,
     SYSTEM_PROMPT
 )
