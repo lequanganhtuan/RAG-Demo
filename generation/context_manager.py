@@ -63,7 +63,7 @@ def apply_token_budget(
     available_input_tokens = (max_model_tokens - reserved_output_tokens)
     used_tokens = token_length(system_prompt) + token_length(user_query)
     
-    # Context
+    # Context for input
     selected_contexts = []
 
     for context in contexts:
@@ -73,7 +73,7 @@ def apply_token_budget(
         selected_contexts.append(context)
         used_tokens += context_tokens
     
-    # History
+    # History for input
     selected_history = []
 
     for turn in reversed(history):

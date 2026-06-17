@@ -7,7 +7,7 @@ from google.genai import types
 
 client = genai.Client()
 
-MODEL_NAME = "gemini-2.5-flash"
+MODEL_NAME = "models/gemini-flash-latest"
 LOG_FILE = Path("llm_logs.csv")
 INPUT_PRICE_PER_MILLION = 0.10
 OUTPUT_PRICE_PER_MILLION = 0.40
@@ -68,7 +68,7 @@ def call_api(
         try:
             start_time = time.time()
             response = client.models.generate_content(
-                model="models/gemini-flash-latest",
+                model=MODEL_NAME,
                 contents=user_prompt,
                 config=types.GenerateContentConfig(
                     system_instruction=system_prompt,
