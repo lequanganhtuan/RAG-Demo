@@ -57,3 +57,10 @@ def build_faiss_index(vector_embedding):
 def save_parent_store(parent_store: dict):
     with open(PARENT_STORE_PATH, "wb") as f:
         pickle.dump(parent_store, f)
+        
+def load_parent_store():
+    with open(
+        PARENT_STORE_PATH,
+        "rb"
+    ) as f:
+        return pickle.load(f)

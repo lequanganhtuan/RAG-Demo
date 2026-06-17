@@ -1,4 +1,4 @@
-from embedder import build_faiss_index, FAISS_INDEX_PATH, METADATA_PATH
+from .embedder import FAISS_INDEX_PATH, METADATA_PATH
 import faiss
 import pickle
 from sentence_transformers import SentenceTransformer
@@ -24,8 +24,6 @@ def search_faiss(query_text: str, top_k: int = 20):
     scores, indices = index.search(query_vector, top_k)
     
     child_results = []
-    # parent_contexts = []
-    # seen_parent_ids = set() # Avoid duplicate
         
     # The results from child, using child to get the print parent
     for score, idx in zip(scores[0], indices[0]):
@@ -39,16 +37,5 @@ def search_faiss(query_text: str, top_k: int = 20):
                 "parent_id": p_id,
                 "text": metadata_info["text"],
             })
-            
-            # if p_id is None: # Recursive
-            #     parent_contexts.append(metadata_info["text"])
-            # elif p_id in parent_store and p_id not in seen_parent_ids: # Parent-child 
-            #     seen_parent_ids.add(p_id)
-            #     parent_contexts.append(parent_store[p_id])
-                
-    # return {
-    #     "child_details": child_results,
-    #     "context_for_llm": "\n\n".join(parent_contexts) 
-    # }
     
     return child_results

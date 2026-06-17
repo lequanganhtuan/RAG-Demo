@@ -1,9 +1,4 @@
-from loader import load_document
-from cleaner import clean_data
-from pathlib import Path
-from transformers import AutoTokenizer
-
-from tokenizer_utils import tokenizer, token_length
+from .tokenizer_utils import tokenizer, token_length
 
 SEPARATORS = ["\n\n", "\n", ".", " "]
 

@@ -1,4 +1,4 @@
-from chunker import recursive_chunking, SEPARATORS
+from .chunker import recursive_chunking, SEPARATORS
 
 PARENT_SIZE = 1500
 PARENT_OVERLAP = 100
