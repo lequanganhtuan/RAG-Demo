@@ -33,7 +33,7 @@ def query_pipeline(
         parent_store
     )
 
-    contexts, history = apply_token_budget(
+    contexts, selected_history = apply_token_budget(
         contexts=contexts,
         system_prompt=SYSTEM_PROMPT,
         user_query=user_query,
@@ -42,7 +42,7 @@ def query_pipeline(
 
     system_prompt, user_prompt = build_prompt(
         contexts,
-        history,
+        selected_history,
         user_query
     )
 
@@ -52,23 +52,12 @@ def query_pipeline(
         user_query=user_query
     )
 
-    history.append(
-        {
-            "role": "user",
-            "content": user_query
-        }
-    )
-
-    history.append(
-        {
-            "role": "assistant",
-            "content": answer
-        }
-    )
-
     return {
         "answer": answer,
-        "history": history,
+        "retrieval_results": retrieval_results,
+        "reranked_results": reranked_results,
         "contexts": contexts,
-        "retrieval_results": reranked_results
+        "system_prompt": system_prompt,
+        "user_prompt": user_prompt,
+        "selected_history": selected_history
     }
