@@ -66,12 +66,27 @@ def call_api(
     user_query: str,
     max_retries: int = 3
 ) -> str:
+
     retry_delay = 1
+
+    print("=" * 50)
+    print("CALL_API_START")
+
     for attempt in range(max_retries):
+
+        print(f"ATTEMPT: {attempt + 1}")
+
         try:
+
+            print("SYSTEM LENGTH:", len(system_prompt))
+            print("USER LENGTH:", len(user_prompt))
+
             start_time = time.time()
+
+            print("BEFORE GENERATE_CONTENT")
+
             response = client.models.generate_content(
-                model="models/gemini-flash-latest",
+                model=MODEL_NAME,
                 contents=user_prompt,
                 config=types.GenerateContentConfig(
                     system_instruction=system_prompt,
@@ -79,11 +94,17 @@ def call_api(
                 )
             )
 
+            print("AFTER GENERATE_CONTENT")
+
             latency_ms = int(
                 (time.time() - start_time) * 1000
             )
 
+            print("LATENCY:", latency_ms)
+
             usage = response.usage_metadata
+
+            print("USAGE:", usage)
 
             input_tokens = getattr(
                 usage,
@@ -96,6 +117,9 @@ def call_api(
                 "candidates_token_count",
                 0
             )
+
+            print("INPUT TOKENS:", input_tokens)
+            print("OUTPUT TOKENS:", output_tokens)
 
             cost = estimate_cost(
                 input_tokens,
@@ -110,13 +134,19 @@ def call_api(
                 cost=cost
             )
 
+            print("CALL_API_DONE")
+
             return response.text
 
         except Exception as e:
 
+            print("CALL_API_EXCEPTION")
+            print(type(e))
+            print(repr(e))
+            print(str(e))
+
             error_message = str(e).lower()
 
-            # Invalid API key
             if (
                 "api key" in error_message
                 or "permission" in error_message
@@ -126,18 +156,22 @@ def call_api(
                     "Invalid Gemini API key"
                 )
 
-            # Rate limit
             if (
                 "429" in error_message
                 or "rate limit" in error_message
                 or "quota" in error_message
             ):
+                print(
+                    f"Retry after {retry_delay}s"
+                )
 
                 if attempt < max_retries - 1:
                     time.sleep(retry_delay)
                     retry_delay *= 2
                     continue
-            raise e
+
+            raise
+
     raise RuntimeError(
         "Gemini request failed after retries"
     )

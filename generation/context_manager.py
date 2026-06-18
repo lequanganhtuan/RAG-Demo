@@ -55,8 +55,8 @@ def apply_token_budget(
     system_prompt: str,
     user_query: str,
     history: list[dict],
-    max_model_tokens: int = 32000,
-    reserved_output_tokens: int = 2000
+    max_model_tokens: int = 8000,
+    reserved_output_tokens: int = 1000
 ) -> tuple[list[str], list[dict]]:
     
     # Input token
