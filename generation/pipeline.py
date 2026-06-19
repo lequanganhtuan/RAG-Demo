@@ -24,6 +24,7 @@ def query_pipeline(
     )
     
     print(len(retrieval_results))
+    
     print("2 RERANK")
     reranked_results = rerank_results(
         user_query=user_query,
