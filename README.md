@@ -79,8 +79,6 @@ PDF
 
 ## Project Structure
 
-## Project Structure
-
 <div align="center">
   <h3>Module 1: Ingestion</h3>
   <img src="assets/module1.png" alt="Module 1" width="100%" style="max-width: 700px; margin-bottom: 20px;">
