@@ -1,9 +1,11 @@
 from ingestion.pipeline import run_pipeline
 from pathlib import Path
+
 from retrieval.embedder import (
     embed_chunks,
     build_faiss_index,
-    save_parent_store
+    save_parent_store,
+    build_bm25_index
 )
 
 def build_retrieval_index(document_path):
@@ -16,6 +18,15 @@ def build_retrieval_index(document_path):
     ]
 
     build_faiss_index(embeddings)
+    metadata_store = []
+
+    for entry in vector_database:
+        metadata_store.append({
+            "child_id": entry["child_id"],
+            "text": entry["text"],
+            "parent_id": entry["parent_id"]
+        })
+    build_bm25_index(metadata_store)
     save_parent_store(parent_store)
 
     return parent_store
