@@ -79,11 +79,21 @@ PDF
 
 ## Project Structure
 
-![Module 1](assets/module1.png)
-![Module 2](assets/module2.png)
-![Module 3](assets/module3.png)
-![Module 4](assets/module4.png)
-![Module 5](assets/module5.png)
+## Project Structure
+
+<div align="center">
+  <h3>Module 1: Ingestion</h3>
+  <img src="assets/module1.png" alt="Module 1" width="100%" style="max-width: 700px; margin-bottom: 20px;">
+
+  <h3>Module 2: Retrieval</h3>
+  <img src="assets/module2.png" alt="Module 2" width="100%" style="max-width: 700px; margin-bottom: 20px;">
+
+  <h3>Module 3: Generation</h3>
+  <img src="assets/module3.png" alt="Module 3" width="100%" style="max-width: 700px; margin-bottom: 20px;">
+
+  <h3>Module 4: Evaluation</h3>
+  <img src="assets/module4.png" alt="Module 4" width="100%" style="max-width: 700px; margin-bottom: 20px;">
+</div>
 
 ```
 multi-llm-rag/
