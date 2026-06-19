@@ -44,7 +44,7 @@ This project addresses these challenges through a multi-stage retrieval pipeline
 
 ## System Architecture
 
-(assets/system_diagram.png)
+![System Diagram](assets/system_diagram.png)
 
 ```
 PDF
@@ -79,11 +79,11 @@ PDF
 
 ## Project Structure
 
-Module 1 ((assets/module1.png))
-Module 2 ((assets/module2.png))
-Module 3 ((assets/module3.png))
-Module 4 ((assets/module4.png))
-Module 5 ((assets/module5.png))
+![Module 1](assets/module1.png)
+![Module 2](assets/module2.png)
+![Module 3](assets/module3.png)
+![Module 4](assets/module4.png)
+![Module 5](assets/module5.png)
 
 ```
 multi-llm-rag/
