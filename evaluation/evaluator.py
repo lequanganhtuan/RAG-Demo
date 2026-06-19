@@ -8,7 +8,7 @@ from evaluation.judge import evaluate_answer
 
 EVAL_LOG_PATH = Path("evaluation_results.csv")
 
-
+## OFFLINE BENMARKING
 def run_batch_evaluation(
     questions: list[str],
     parent_store: dict
