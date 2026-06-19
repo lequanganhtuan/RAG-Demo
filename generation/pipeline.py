@@ -1,4 +1,4 @@
-from retrieval.retriever import search_faiss
+from retrieval.retriever import search_hybrid
 from generation.context_manager import (
     rerank_results,
     expand_parent_context,
@@ -18,10 +18,10 @@ def query_pipeline(
     history: list[dict]
 ):
     print("1 SEARCH")
-    retrieval_results = search_faiss(
+    retrieval_results = search_hybrid(
         query_text=user_query,
         top_k=20
-    )
+    )   
     
     print(len(retrieval_results))
     

@@ -4,6 +4,7 @@ from pathlib import Path
 import faiss
 import numpy as np
 from sentence_transformers import SentenceTransformer
+from rank_bm25 import BM25Okapi
 
 _model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
 VECTOR_DIM = 384 # Vector size of model 
@@ -11,9 +12,9 @@ VECTOR_DIM = 384 # Vector size of model
 # Path to save data into disk
 BASE_DIR = Path(__file__).parent
 FAISS_INDEX_PATH = BASE_DIR / "faiss_index.index"
+BM25_PATH = BASE_DIR / "bm25_index.pkl"
 METADATA_PATH = BASE_DIR / "metadata_store.pkl"
 PARENT_STORE_PATH = BASE_DIR / "parent_store.pkl"
-
 
 
 
@@ -53,6 +54,22 @@ def build_faiss_index(vector_embedding):
     
     # Save faiss index
     faiss.write_index(index, str(FAISS_INDEX_PATH))
+    
+def build_bm25_index(metadata_store: list[dict]):
+    corpus = [
+        item["text"]
+        for item in metadata_store
+    ]
+
+    tokenized_corpus = [
+        doc.lower().split()
+        for doc in corpus
+    ]
+
+    bm25 = BM25Okapi(tokenized_corpus)
+
+    with open(BM25_PATH, "wb") as f:
+        pickle.dump(bm25,f)
 
 def save_parent_store(parent_store: dict):
     with open(PARENT_STORE_PATH, "wb") as f:
